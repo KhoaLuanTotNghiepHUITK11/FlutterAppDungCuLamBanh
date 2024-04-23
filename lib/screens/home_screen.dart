@@ -43,6 +43,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
-        body: const Text("Giỏ hàng"));
+        body: const Text("Trang chủ"));
   }
 }

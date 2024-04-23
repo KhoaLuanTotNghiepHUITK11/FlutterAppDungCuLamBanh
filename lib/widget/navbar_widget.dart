@@ -14,7 +14,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
   int _selectedIndex = 0;
   final List<Widget> _pages = <Widget>[
     const HomeScreen(),
-    const CartScreen(),
+    CartScreen(),
     const SignInScreen(),
   ];
 
@@ -33,12 +33,12 @@ class _NavBarWidgetState extends State<NavBarWidget> {
         },
       ),
       bottomNavigationBar: NavigationBar(
-        indicatorColor: Color(0xfff8d9d6),
+        indicatorColor: const Color(0xfff8d9d6),
         destinations: const <Widget>[
           NavigationDestination(
             selectedIcon: Icon(Icons.home),
             icon: Icon(Icons.home_outlined),
-            label: 'Home',
+            label: 'Trang chủ',
           ),
           NavigationDestination(
             icon: Badge(child: Icon(Icons.shop_rounded)),

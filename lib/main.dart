@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:whiskflourish/screens/home_screen.dart';
 import 'package:whiskflourish/widget/navbar_widget.dart';
 
 void main() async {
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xfff8d9d6)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xfff8d9d6)),
         useMaterial3: true,
       ),
       home: const NavBarWidget(),
