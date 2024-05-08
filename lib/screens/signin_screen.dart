@@ -1,10 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:whiskflourish/widget/navbar_widget.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController _passwordController = TextEditingController();
+    final FirebaseAuth _auth = FirebaseAuth.instance;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Đăng nhập'),
@@ -23,6 +28,7 @@ class SignInScreen extends StatelessWidget {
                   )),
               const SizedBox(height: 20),
               TextFormField(
+                controller: _emailController,
                 obscureText: false,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -31,6 +37,7 @@ class SignInScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               TextFormField(
+                controller: _passwordController,
                 obscureText: true,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -39,7 +46,25 @@ class SignInScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
+                  try {
+                    await _auth.signInWithEmailAndPassword(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    );
+                    // ignore: use_build_context_synchronously
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute<void>(
+                        builder: (context) => const NavBarWidget(),
+                      ),
+                    );
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(e.toString()),
+                      ),
+                    );
+                  }
                   // Add your sign-in logic here
                 },
                 child: const Text('Đăng nhập'),

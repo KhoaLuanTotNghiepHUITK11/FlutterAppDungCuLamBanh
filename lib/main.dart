@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:whiskflourish/widget/navbar_widget.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart'; // Tệp cấu hình Firebase
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       systemNavigationBarColor: Colors.transparent,
@@ -23,11 +28,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Whisk & Flourish Shop',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xfff8d9d6)),
         useMaterial3: true,
       ),
+      // darkTheme: ThemeData(
+      //   primaryColor: Colors.grey[800],
+      //   useMaterial3: true,
+      //   colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff4a4c4b))
+      //       .copyWith(background: Colors.black),
+      // ),
+      themeMode: ThemeMode.system,
       home: const NavBarWidget(),
     );
   }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:whiskflourish/screens/cart_screen.dart';
 import 'package:whiskflourish/screens/home_screen.dart';
+import 'package:whiskflourish/screens/profile_screen.dart';
 import 'package:whiskflourish/screens/signin_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class NavBarWidget extends StatefulWidget {
   const NavBarWidget({super.key});
@@ -15,10 +17,31 @@ class _NavBarWidgetState extends State<NavBarWidget> {
   final List<Widget> _pages = <Widget>[
     const HomeScreen(),
     CartScreen(),
-    const SignInScreen(),
+    const ProfileScreen(),
   ];
 
   final PageController _pageController = PageController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _auth.authStateChanges().listen((user) {
+  //     if (user == null) {
+  //       Navigator.of(context).pushReplacement(
+  //         MaterialPageRoute<void>(
+  //           builder: (context) => const SignInScreen(),
+  //         ),
+  //       );
+  //     } else {
+  //       Navigator.of(context).pushReplacement(
+  //         MaterialPageRoute<void>(
+  //           builder: (context) => const SignInScreen(),
+  //         ),
+  //       );
+  //     }
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     Theme.of(context);
@@ -59,8 +82,23 @@ class _NavBarWidgetState extends State<NavBarWidget> {
             duration: const Duration(milliseconds: 300),
             curve: Curves.ease,
           );
+          if (index == 2) {
+            checkLoginStatus();
+          }
         },
       ),
     );
+  }
+
+  void checkLoginStatus() {
+    User? user = _auth.currentUser;
+    if (user == null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const SignInScreen(),
+        ),
+      );
+    }
   }
 }

@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "969164296353",
+    "project_id": "qldclb-770f5",
+    "storage_bucket": "qldclb-770f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969164296353:android:971252ed7793b2e912a0e0",
+        "android_client_info": {
+          "package_name": "com.android.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969164296353-382cikr1353lpqt2ff93ov5ee1d75clh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgRUT5vYcR3PfzESJdOnOdsAoOw_FBvqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969164296353-382cikr1353lpqt2ff93ov5ee1d75clh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969164296353:android:fbeb1e96585d8d4312a0e0",
+        "android_client_info": {
+          "package_name": "com.example.whiskflourish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969164296353-382cikr1353lpqt2ff93ov5ee1d75clh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgRUT5vYcR3PfzESJdOnOdsAoOw_FBvqU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969164296353-382cikr1353lpqt2ff93ov5ee1d75clh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
