@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="whiskflourish"
+        android:label="Whisk Flourish Shop"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

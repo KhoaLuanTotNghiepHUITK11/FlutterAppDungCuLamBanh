@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:whiskflourish/screens/cart_screen.dart';
 import 'package:whiskflourish/screens/home_screen.dart';
 import 'package:whiskflourish/screens/profile_screen.dart';
@@ -16,8 +17,8 @@ class _NavBarWidgetState extends State<NavBarWidget> {
   int _selectedIndex = 0;
   final List<Widget> _pages = <Widget>[
     const HomeScreen(),
-    CartScreen(),
-    const ProfileScreen(),
+    const CartScreen(),
+    ProfileScreen(),
   ];
 
   final PageController _pageController = PageController();
@@ -89,16 +90,21 @@ class _NavBarWidgetState extends State<NavBarWidget> {
       ),
     );
   }
+// Lấy thông tin phiên đăng nhập
+  Future<String?> getSession() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('userId');
+  }
 
-  void checkLoginStatus() {
-    User? user = _auth.currentUser;
-    if (user == null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
+  void checkLoginStatus() async{
+    String? userId = await getSession();
+    if(userId == null){
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute<void>(
           builder: (context) => const SignInScreen(),
         ),
       );
     }
+
   }
 }

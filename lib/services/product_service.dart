@@ -3,8 +3,8 @@ import 'dart:convert';
 
 class ProductService {
   Future<List<Product>> getProducts() async {
-    final response =
-        await http.get(Uri.parse('https://localhost:7249/api/dungcu'));
+    final response = await http.get(
+        Uri.parse('https://nearby-capital-chipmunk.ngrok-free.app/api/dungcu'));
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);

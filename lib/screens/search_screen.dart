@@ -24,16 +24,22 @@ class _SearchBarAppState extends State<SearchBarApp> {
     return MaterialApp(
       theme: themeData,
       home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Đăng nhập'),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              // Add your logic here
+              Navigator.pop(context);
+            },
+          ),
+        ),
         body: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back),
-                    onPressed: () => Navigator.pop(context),
-                  ),
                   Expanded(
                     child: SearchAnchor(builder:
                         (BuildContext context, SearchController controller) {
