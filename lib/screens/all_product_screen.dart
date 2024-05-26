@@ -40,7 +40,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                   return GestureDetector(
                     onTap: () async {
                       final url =
-                          'https://localhost:7249/Product/Detail/${product.id}';
+                          'http://35.223.233.219/Product/Detail/${product.id}';
                       // ignore: deprecated_member_use
                       if (await canLaunch(url)) {
                         // ignore: deprecated_member_use

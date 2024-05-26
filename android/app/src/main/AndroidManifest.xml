@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:label="Whisk Flourish Shop"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
@@ -41,4 +43,6 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
 </manifest>

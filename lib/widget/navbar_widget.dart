@@ -16,7 +16,7 @@ class NavBarWidget extends StatefulWidget {
 class _NavBarWidgetState extends State<NavBarWidget> {
   int _selectedIndex = 0;
   final List<Widget> _pages = <Widget>[
-    const HomeScreen(),
+    HomeScreen(),
     const CartScreen(),
     ProfileScreen(),
   ];
@@ -90,21 +90,21 @@ class _NavBarWidgetState extends State<NavBarWidget> {
       ),
     );
   }
+
 // Lấy thông tin phiên đăng nhập
   Future<String?> getSession() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('userId');
   }
 
-  void checkLoginStatus() async{
+  void checkLoginStatus() async {
     String? userId = await getSession();
-    if(userId == null){
+    if (userId == null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute<void>(
           builder: (context) => const SignInScreen(),
         ),
       );
     }
-
   }
 }

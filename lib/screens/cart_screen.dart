@@ -68,48 +68,58 @@ class _CartScreenState extends State<CartScreen> {
             child: BottomAppBar(
               child: Container(
                 padding: const EdgeInsets.all(20),
-                constraints: const BoxConstraints(maxHeight: 10),
+                constraints: const BoxConstraints(
+                    maxHeight: 100), // Tăng maxHeight để đủ chỗ cho các phần tử
                 child: FutureBuilder<double>(
-                    future: futureTotal,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator();
-                      } else if (snapshot.hasError) {
-                        return Text('Error: ${snapshot.error}');
-                      } else {
-                        var total = snapshot.data;
-                        // Use total to build your UI
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              'Tổng cộng:',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            Text(
-                              // ignore: unnecessary_brace_in_string_interps
-                              '${total?.round()}₫',
-                              style: const TextStyle(fontSize: 20),
-                            ),
-                            ElevatedButton(
-                              onPressed: () async {
-                                const url =
-                                    'http://localhost:5141/Cart/CheckOut';
+                  future: futureTotal,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      var total = snapshot.data;
+                      // Use total to build your UI
+                      return Column(
+                        mainAxisAlignment:
+                            MainAxisAlignment.end, // Đặt phần tử xuống cuối
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Tổng cộng:',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Text(
+                                // ignore: unnecessary_brace_in_string_interps
+                                '${total?.round()}₫',
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                              height:
+                                  10), // Khoảng cách giữa tổng cộng và nút thanh toán
+                          ElevatedButton(
+                            onPressed: () async {
+                              const url = 'http://35.223.233.219/Cart/CheckOut';
+                              // ignore: deprecated_member_use
+                              if (await canLaunch(url)) {
                                 // ignore: deprecated_member_use
-                                if (await canLaunch(url)) {
-                                  // ignore: deprecated_member_use
-                                  await launch(url);
-                                } else {
-                                  throw 'Could not launch $url';
-                                }
-                                // Handle the payment process here
-                              },
-                              child: const Text('Thanh toán'),
-                            ),
-                          ],
-                        );
-                      }
-                    }),
+                                await launch(url);
+                              } else {
+                                throw 'Could not launch $url';
+                              }
+                              // Handle the payment process here
+                            },
+                            child: const Text('Thanh toán'),
+                          ),
+                        ],
+                      );
+                    }
+                  },
+                ),
               ),
             ),
           )
