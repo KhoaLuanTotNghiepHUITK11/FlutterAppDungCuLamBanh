@@ -43,7 +43,12 @@ class HomeScreen extends StatelessWidget {
       length: 2, // Number of tabs
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Whisk & Flourisk'),
+          title: Image.asset(
+            'assets/logodoc.png',
+            height: 30,
+            fit: BoxFit.cover,
+            alignment: Alignment.topLeft,
+          ),
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.search),

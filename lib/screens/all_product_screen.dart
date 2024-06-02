@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:whiskflourish/screens/detail_screen.dart';
+import 'package:whiskflourish/services/detail_product_service.dart';
 import 'package:whiskflourish/services/product_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,40 +23,50 @@ class _AllProductScreenState extends State<AllProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWith = MediaQuery.of(context).size.width;
-    final int count = screenWith ~/ 200;
-    return FutureBuilder<List<Product>>(
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final int count = (screenWidth / 200).ceil();
+
+    return RefreshIndicator(
+      onRefresh: () async {
+        setState(() {
+          futureProducts = productService.getProducts();
+        });
+      },
+      child: FutureBuilder<List<Product>>(
         future: futureProducts,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return GridView.builder(
+            return SingleChildScrollView(
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: snapshot.hasData ? snapshot.data!.length : 0,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: count,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
                   crossAxisSpacing: 1,
                   mainAxisSpacing: 1,
-                  childAspectRatio: 0.8,
+                  childAspectRatio: 0.75,
                 ),
                 itemBuilder: (context, index) {
                   final product = snapshot.data![index];
                   return GestureDetector(
                     onTap: () async {
-                      final url =
-                          'http://35.223.233.219/Product/Detail/${product.id}';
-                      // ignore: deprecated_member_use
-                      if (await canLaunch(url)) {
-                        // ignore: deprecated_member_use
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                      // Xử lý khi người dùng chọn sản phẩm
+                      //Mở detail screen khi click vào sản phẩm
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailScreen(
+                            productService: DetailProductService(),
+                            product: product,
+                          ),
+                        ),
+                      );
                     },
                     child: Card(
                       color: Theme.of(context).colorScheme.surfaceVariant,
                       elevation: 0,
                       child: Container(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                        padding: const EdgeInsets.all(0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -62,31 +74,44 @@ class _AllProductScreenState extends State<AllProductScreen> {
                               borderRadius: BorderRadius.circular(12.0),
                               child: Image.network(
                                 product.image,
-                                width: double.infinity,
-                                height: 150,
+                                width: double
+                                    .infinity, // Fixed height for the image
                                 fit: BoxFit.cover,
                               ),
                             ),
                             const SizedBox(height: 0),
-                            Text(
-                              product.name,
-                              style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                            Padding(
+                              //padding==0
+
+                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+
+                              child: Text(
+                                product.name,
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                ),
                               ),
                             ),
-                            const Padding(
-                                padding: EdgeInsets.fromLTRB(5, 10, 20, 10)),
-                            Text(
-                              "${product.price} VND",
-                              style: const TextStyle(fontSize: 16),
+                            const Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
+                              child: Text(
+                                "${product.price}₫",
+                                style: const TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFFE91E63),
+                                ),
+                              ),
                             ),
                           ],
                         ),
                       ),
                     ),
                   );
-                });
+                },
+              ),
+            );
           } else if (snapshot.hasError) {
             return Center(
               child: Text("${snapshot.error}"),
@@ -95,6 +120,8 @@ class _AllProductScreenState extends State<AllProductScreen> {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        });
+        },
+      ),
+    );
   }
 }

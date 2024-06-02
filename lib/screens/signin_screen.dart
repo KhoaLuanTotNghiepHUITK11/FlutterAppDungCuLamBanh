@@ -31,13 +31,20 @@ class SignInScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text('Chào mừng đến WhiskFlourish',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  )),
+              // const Text('Chào mừng đến',
+              //     style: TextStyle(
+              //       fontSize: 24,
+              //       fontWeight: FontWeight.bold,
+              //     )),
+              Image.asset(
+                'assets/logo.png',
+                width: 100,
+                height: 100,
+                fit: BoxFit.cover,
+                alignment: Alignment.topLeft,
+              ),
               const SizedBox(height: 20),
               TextFormField(
                 controller: emailController,
@@ -73,11 +80,12 @@ class SignInScreen extends StatelessWidget {
                     );
                     // Lưu thông tin phiên đăng nhập
                     Future<void> saveSession(String userId) async {
-                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
                       await prefs.setString('userId', userId);
                     }
-                    saveSession(auth.currentUser!.uid);
 
+                    saveSession(auth.currentUser!.uid);
                   } catch (e) {
                     showDialog(
                       context: context,

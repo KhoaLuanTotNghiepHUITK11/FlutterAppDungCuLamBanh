@@ -4,7 +4,7 @@ import 'dart:convert';
 class ProductService {
   Future<List<Product>> getProducts() async {
     final response =
-        await http.get(Uri.parse('http://35.223.233.219/api/dungcu'));
+        await http.get(Uri.parse('http://34.150.89.227/api/sanpham'));
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
@@ -22,7 +22,8 @@ class Product {
   final String image;
 
   Product(
-      {required this.id,
+      {
+        required this.id,
       required this.name,
       required this.price,
       this.image =

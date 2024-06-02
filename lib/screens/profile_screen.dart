@@ -118,7 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () async {
-                          const url = 'http://35.223.233.219/Account/Edit';
+                          const url = 'http://34.150.89.227/Account/Edit';
                           // ignore: deprecated_member_use
                           if (await canLaunch(url)) {
                             // ignore: deprecated_member_use

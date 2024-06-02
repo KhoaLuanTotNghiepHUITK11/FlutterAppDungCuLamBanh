@@ -34,13 +34,13 @@ class CartService {
     final uid = user?.uid;
 
     final response =
-        await http.get(Uri.parse('http://35.223.233.219/api/cart/$uid'));
+        await http.get(Uri.parse('http://34.150.89.227/api/cart/$uid'));
 
     if (response.statusCode == 200) {
       final List<dynamic> data = json.decode(response.body);
       return data.map((json) => CartItem.fromJson(json)).toList();
     } else {
-      throw Exception('Giỏ hàng trống');
+      return throw Exception('Failed to load cart items');
     }
   }
 
@@ -53,7 +53,7 @@ class CartService {
 
     var uid = await _getUserIdFromSharedPreferences();
     final response =
-        await http.get(Uri.parse('http://35.223.233.219/api/cart/total/$uid'));
+        await http.get(Uri.parse('http://34.150.89.227/api/cart/total/$uid'));
     if (response.statusCode == 200) {
       return double.parse(response.body);
     } else {
