@@ -32,14 +32,14 @@ class _AllProductScreenState extends State<AllProductScreen> {
           futureProducts = productService.getProducts();
         });
       },
-      child: FutureBuilder<List<Product>>(
+      child:FutureBuilder<List<Product>>(
         future: futureProducts,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return SingleChildScrollView(
               child: GridView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: snapshot.hasData ? snapshot.data!.length : 0,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -88,22 +88,48 @@ class _AllProductScreenState extends State<AllProductScreen> {
                               child: Text(
                                 product.name,
                                 style: const TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
                             const Spacer(),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
-                              child: Text(
-                                "${product.price}₫",
-                                style: const TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xFFE91E63),
-                                ),
-                              ),
-                            ),
+                                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
+                                    child: product.pricesale == 0
+                                      ? Text(
+                                          "${product.price.round()}₫",
+                                          style: const TextStyle(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xFFE91E63),
+                                          ),
+                                        )
+                                      : RichText(
+                                          text: TextSpan(
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text: "${product.price.round()}₫",
+                                                style: const TextStyle(
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.grey,
+                                                  decoration: TextDecoration.lineThrough,
+                                                ),
+                                              ),
+                                              const TextSpan(text: " "),
+                                              TextSpan(
+                                                text: "${product.pricesale.round()}₫",
+                                                style: const TextStyle(
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Color(0xFFE91E63),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                  ),
                           ],
                         ),
                       ),

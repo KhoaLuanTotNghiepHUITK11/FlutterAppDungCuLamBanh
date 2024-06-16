@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:whiskflourish/screens/detail_screen.dart';
+import 'package:whiskflourish/services/detail_product_service.dart';
 import 'package:whiskflourish/services/product_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:scrollview_observer/scrollview_observer.dart';
@@ -13,11 +15,13 @@ class MainScreenScreen extends StatefulWidget {
 class _MainScreenScreenState extends State<MainScreenScreen> {
   //Goi Service de lay danh sach san pham
   final ProductService productService = ProductService();
-  late Future<List<Product>> futureProducts;
+  late Future<List<Product>> futureSaleOffProducts;
+  late Future<List<Product>> futureNewProducts;
   @override
   void initState() {
     super.initState();
-    futureProducts = productService.getProducts();
+    futureSaleOffProducts = productService.getSaleOffProducts();
+    futureNewProducts = productService.getNewProduct();
   }
 
   @override
@@ -29,11 +33,13 @@ class _MainScreenScreenState extends State<MainScreenScreen> {
     return RefreshIndicator(
       onRefresh: () async {
         setState(() {
-          futureProducts = productService.getProducts();
+          futureSaleOffProducts = productService.getSaleOffProducts();
+          futureNewProducts =  productService.getNewProduct();
         });
       },
-      child: FutureBuilder<List<Product>>(
-        future: futureProducts,
+      
+      child: FutureBuilder<List<Product>>(       
+        future: futureSaleOffProducts,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -92,13 +98,15 @@ class _MainScreenScreenState extends State<MainScreenScreen> {
                       final product = snapshot.data![index];
                       return GestureDetector(
                         onTap: () async {
-                          final url =
-                              'http://34.150.89.227/Product/Detail/${product.id}';
-                          if (await canLaunch(url)) {
-                            await launch(url);
-                          } else {
-                            throw 'Could not launch $url';
-                          }
+                          Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailScreen(
+                            productService: DetailProductService(),
+                            product: product,
+                          ),
+                        ),
+                      );
                         },
                         child: Card(
                           color: Theme.of(context).colorScheme.surfaceVariant,
@@ -127,23 +135,48 @@ class _MainScreenScreenState extends State<MainScreenScreen> {
                                   child: Text(
                                     product.name,
                                     style: const TextStyle(
-                                      fontSize: 15,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ),
                                 const Spacer(),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 0, 0, 10),
-                                  child: Text(
-                                    "${product.price}₫",
-                                    style: const TextStyle(
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFFE91E63),
-                                    ),
+                                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
+                                    child: product.pricesale == 0
+                                      ? Text(
+                                          "${product.price.round()}₫",
+                                          style: const TextStyle(
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xFFE91E63),
+                                          ),
+                                        )
+                                      : RichText(
+                                          text: TextSpan(
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text: "${product.price.round()}₫",
+                                                style: const TextStyle(
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.grey,
+                                                  decoration: TextDecoration.lineThrough,
+                                                ),
+                                              ),
+                                              TextSpan(text: " "),
+                                              TextSpan(
+                                                text: "${product.pricesale.round()}₫",
+                                                style: const TextStyle(
+                                                  fontSize: 11,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Color(0xFFE91E63),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                   ),
-                                ),
                               ],
                             ),
                           ),
@@ -153,6 +186,9 @@ class _MainScreenScreenState extends State<MainScreenScreen> {
                     childCount: snapshot.data!.length,
                   ),
                 ),
+                
+                
+                
               ],
             );
           } else {
@@ -162,6 +198,8 @@ class _MainScreenScreenState extends State<MainScreenScreen> {
           }
         },
       ),
+      
     );
+    
   }
 }
