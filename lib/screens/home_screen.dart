@@ -1,17 +1,12 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:whiskflourish/screens/main_screen.dart';
 import 'package:whiskflourish/screens/search_screen.dart'; // Assuming this import is needed
 import 'package:whiskflourish/screens/all_product_screen.dart'; // Assuming this import is needed
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webview_flutter_android/webview_flutter_android.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
   // final webViewController = WebViewController()
   //   ..setJavaScriptMode(JavaScriptMode.unrestricted)
   //   ..setBackgroundColor(const Color(0x00000000))

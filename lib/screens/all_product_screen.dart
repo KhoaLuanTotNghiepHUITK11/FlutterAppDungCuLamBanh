@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:whiskflourish/screens/detail_screen.dart';
 import 'package:whiskflourish/services/detail_product_service.dart';
 import 'package:whiskflourish/services/product_service.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AllProductScreen extends StatefulWidget {
   const AllProductScreen({super.key});
@@ -23,8 +22,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final int count = (screenWidth / 200).ceil();
+ 
 
     return RefreshIndicator(
       onRefresh: () async {
@@ -63,7 +61,7 @@ class _AllProductScreenState extends State<AllProductScreen> {
                       );
                     },
                     child: Card(
-                      color: Theme.of(context).colorScheme.surfaceVariant,
+                      color: Theme.of(context).colorScheme.surfaceContainerHighest,
                       elevation: 0,
                       child: Container(
                         padding: const EdgeInsets.all(0),

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:whiskflourish/screens/detail_screen.dart';
 import 'package:whiskflourish/services/detail_product_service.dart';
 import 'package:whiskflourish/services/product_service.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:scrollview_observer/scrollview_observer.dart';
 
 class MainScreenScreen extends StatefulWidget {
   const MainScreenScreen({super.key});
@@ -26,9 +24,6 @@ class _MainScreenScreenState extends State<MainScreenScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final int count = screenWidth ~/ 150;
 
     return RefreshIndicator(
       onRefresh: () async {
@@ -109,7 +104,7 @@ class _MainScreenScreenState extends State<MainScreenScreen> {
                       );
                         },
                         child: Card(
-                          color: Theme.of(context).colorScheme.surfaceVariant,
+                          color: Theme.of(context).colorScheme.surfaceContainerHighest,
                           elevation: 0,
                           child: Container(
                             padding: const EdgeInsets.all(0),
@@ -164,7 +159,7 @@ class _MainScreenScreenState extends State<MainScreenScreen> {
                                                   decoration: TextDecoration.lineThrough,
                                                 ),
                                               ),
-                                              TextSpan(text: " "),
+                                              const TextSpan(text: " "),
                                               TextSpan(
                                                 text: "${product.pricesale.round()}₫",
                                                 style: const TextStyle(

@@ -3,7 +3,6 @@ import 'package:whiskflourish/widget/navbar_widget.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,16 +32,20 @@ class AboutScreen extends StatelessWidget {
                       Center(
                         child: Text(
                           'Whisk & Flourish',
-                          style: TextStyle(fontSize: 24),
+                          style: TextStyle(fontSize: 20),
                         ),
                       ),
-                      Column(
-                        children: [
-                          Center(
-                              child: Text('Phiên bản alpha',
-                                  style: TextStyle(fontSize: 11))),
-                        ],
-                      )
+
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Center(
+                        child: Text(
+                          'Phiên bản alpha',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
                     ],
                   ),
                 ],

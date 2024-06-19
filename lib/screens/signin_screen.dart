@@ -1,6 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:whiskflourish/screens/signup_screen.dart';
 import 'package:whiskflourish/widget/navbar_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,11 +34,6 @@ class SignInScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // const Text('Chào mừng đến',
-              //     style: TextStyle(
-              //       fontSize: 24,
-              //       fontWeight: FontWeight.bold,
-              //     )),
               Image.asset(
                 'assets/logo.png',
                 width: 100,
@@ -111,13 +107,33 @@ class SignInScreen extends StatelessWidget {
                 },
                 child: const Text('Đăng nhập'),
               ),
-              const Text("Chưa có tài khoản?"),
               TextButton(
-                onPressed: () {
-                  // Navigate to sign-up screen
-                },
-                child: const Text('Đăng ký ngay'),
+                onPressed: () async {
+                      const url = 'http://34.150.89.227/Account/ResetPassword';
+                      // ignore: deprecated_member_use
+                      if (await canLaunch(url)) {
+                        // ignore: deprecated_member_use
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                child: const Text('Quên mật khẩu?'),
               ),
+              const SizedBox(height: 10),
+              const Text("Chưa có tài khoản?"),
+              ElevatedButton(
+                    onPressed: () async {
+                     //Mở màn hình Order
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignUpScreen(),
+                      ),
+                    );
+                    },
+                    child: const Text('Đăng ký'),
+                  ),
             ],
           ),
         ),

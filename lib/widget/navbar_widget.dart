@@ -4,7 +4,6 @@ import 'package:whiskflourish/screens/cart_screen.dart';
 import 'package:whiskflourish/screens/home_screen.dart';
 import 'package:whiskflourish/screens/profile_screen.dart';
 import 'package:whiskflourish/screens/signin_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class NavBarWidget extends StatefulWidget {
   const NavBarWidget({super.key});
@@ -16,32 +15,13 @@ class NavBarWidget extends StatefulWidget {
 class _NavBarWidgetState extends State<NavBarWidget> {
   int _selectedIndex = 0;
   final List<Widget> _pages = <Widget>[
-    HomeScreen(),
+    const HomeScreen(),
     const CartScreen(),
-    ProfileScreen(),
+    const ProfileScreen(),
   ];
 
   final PageController _pageController = PageController();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _auth.authStateChanges().listen((user) {
-  //     if (user == null) {
-  //       Navigator.of(context).pushReplacement(
-  //         MaterialPageRoute<void>(
-  //           builder: (context) => const SignInScreen(),
-  //         ),
-  //       );
-  //     } else {
-  //       Navigator.of(context).pushReplacement(
-  //         MaterialPageRoute<void>(
-  //           builder: (context) => const SignInScreen(),
-  //         ),
-  //       );
-  //     }
-  //   });
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +80,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
   void checkLoginStatus() async {
     String? userId = await getSession();
     if (userId == null) {
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pushReplacement(
         MaterialPageRoute<void>(
           builder: (context) => const SignInScreen(),
