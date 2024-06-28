@@ -1,37 +1,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:whiskflourish/screens/main_screen.dart';
+import 'package:whiskflourish/screens/notification_screen.dart';
 import 'package:whiskflourish/screens/search_screen.dart'; // Assuming this import is needed
 import 'package:whiskflourish/screens/all_product_screen.dart'; // Assuming this import is needed
-
 // ignore: must_be_immutable
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-  // final webViewController = WebViewController()
-  //   ..setJavaScriptMode(JavaScriptMode.unrestricted)
-  //   ..setBackgroundColor(const Color(0x00000000))
-  //   ..setNavigationDelegate(
-  //     NavigationDelegate(
-  //       onProgress: (int progress) {
-  //         // Update loading bar.
-  //       },
-  //       onPageStarted: (String url) {},
-  //       onPageFinished: (String url) {},
-  //       onHttpError: (HttpResponseError error) {},
-  //       onWebResourceError: (WebResourceError error) {},
-  //       onNavigationRequest: (NavigationRequest request) async {
-  //         if (request.url.startsWith('http://35.223.233.219/')) {
-  //           return NavigationDecision.prevent;
-  //         } else {
-  //           await launchUrl(
-  //               request.url as Uri); // Assuming this function is defined
-  //           return NavigationDecision.navigate;
-  //         }
-  //       },
-  //     ),
-  //   )
-  //   ..loadRequest(Uri.parse('http://35.223.233.219/'));
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
+class _HomeScreenState extends State<HomeScreen> {
+  // final webViewController = WebViewController()
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -56,9 +37,15 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             IconButton(
-              icon: const Icon(Icons.message),
+              icon: const Icon(Icons.notifications),
               tooltip: 'Go to the next page',
               onPressed: () {
+                Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NotificationScreen(),
+                      ),
+                    );
                 // Handle next page navigation (optional)
               },
             ),

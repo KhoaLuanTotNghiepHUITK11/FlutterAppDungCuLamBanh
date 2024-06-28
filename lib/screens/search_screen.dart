@@ -25,7 +25,7 @@ class _SearchBarAppState extends State<SearchBarApp> {
       theme: themeData,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Đăng nhập'),
+          title: const Text('Tìm kiếm sản phẩm'),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -54,7 +54,7 @@ class _SearchBarAppState extends State<SearchBarApp> {
                           controller.openView();
                         },
                         leading: const Icon(Icons.search),
-                        hintText: 'Tìm dụng cụ',
+                        hintText: 'Nhập sản phẩm...',
                         // trailing: <Widget>[
                         //   Tooltip(
                         //     message: 'Change brightness mode',

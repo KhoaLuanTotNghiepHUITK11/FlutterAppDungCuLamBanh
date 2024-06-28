@@ -45,14 +45,14 @@ class _NavBarWidgetState extends State<NavBarWidget> {
             label: 'Trang chủ',
           ),
           NavigationDestination(
-            icon: Badge(child: Icon(Icons.shop_rounded)),
+            icon: Icon(Icons.shop_rounded),
             label: 'Giỏ hàng',
           ),
           NavigationDestination(
-            icon: Badge(
-              label: Text('2'),
-              child: Icon(Icons.person),
-            ),
+            icon:
+              
+              Icon(Icons.person),
+            
             label: 'Tôi',
           ),
         ],
