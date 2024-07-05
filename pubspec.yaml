@@ -44,8 +44,8 @@ dependencies:
   webview_flutter: ^4.8.0
   scrollview_observer: 
   firebase_database: ^11.0.2
-  intl: ^0.17.0
-  flutter_local_notifications: ^9.1.4
+  intl: ^0.19.0
+  flutter_local_notifications: ^17.2.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

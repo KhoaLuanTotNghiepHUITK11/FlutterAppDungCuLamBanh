@@ -76,7 +76,7 @@ class _CartScreenState extends State<CartScreen> {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const CircularProgressIndicator();
                     } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
+                      return const Text('Giỏ hàng trống');
                     } else {
                       var total = snapshot.data;
                       // Use total to build your UI

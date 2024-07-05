@@ -73,7 +73,7 @@ class _MainScreenScreenState extends State<MainScreenScreen> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                     child: Text(
-                      'Khuyến mại dành cho bạn',
+                      'GIẢM GIÁ DÀNH CHO BẠN',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,

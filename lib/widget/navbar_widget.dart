@@ -76,7 +76,6 @@ class _NavBarWidgetState extends State<NavBarWidget> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('userId');
   }
-
   void checkLoginStatus() async {
     String? userId = await getSession();
     if (userId == null) {

@@ -125,25 +125,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Điểm thưởng: ${userProfile.point}',
+                    'Điểm thưởng: ${userProfile.point} điểm',
                     style: const TextStyle(fontSize: 14),
                   ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      const url = 'http://34.150.89.227/Account/Edit';
-                      // ignore: deprecated_member_use
-                      if (await canLaunch(url)) {
+                  const Divider(),
+                  SizedBox(
+                    width: double.infinity, // Chiều rộng 100%
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        const url = 'http://34.150.89.227/Account/Edit';
                         // ignore: deprecated_member_use
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
-                    },
-                    child: const Text('Cập nhật thông tin'),
+                        if (await canLaunch(url)) {
+                          // ignore: deprecated_member_use
+                          await launch(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
+                      },
+                      child: const Text('Cập nhật thông tin'),
+                    ),
                   ),
                   
                   const Divider(),
-                  ElevatedButton(
+                  SizedBox(
+                    width:double.infinity,
+                    child: ElevatedButton(
                     onPressed: () async {
                      //Mở màn hình Order
                     Navigator.push(
@@ -153,12 +159,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     );
                     },
-                    child: const Text('Đơn hàng'),
+                    child: const Text('Đơn hàng của bạn'),
                   ),
-                  const SizedBox(height: 10),
+                ),
                   
+                  const SizedBox(height: 10),
+                  const Divider(),
 
                 ],
+                
               ),
             );
           } else {
